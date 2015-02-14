@@ -3,5 +3,8 @@ dist
 .tmp
 .sass-cache
 bower_components
-.idea
-.xfc
+
+#mac
+.DS_Store
+.DS_Store?
+._*
