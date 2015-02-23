@@ -8,7 +8,7 @@
  * Controller of the dnaviewerApp
  */
 angular.module('dnaviewerApp')
-  .controller('TestsCtrl', function ($scope, $http) {
+  .controller('TestsCtrl', function ($scope, $http, dnaviewerService) {
     
     
 	
@@ -23,27 +23,65 @@ angular.module('dnaviewerApp')
     $scope.svgRatio=150;  
     $scope.svgStroke=30;
     
-    $scope.ratio=$scope.svgRatio;
+    $scope.radius=$scope.svgRatio;
     $scope.angle=0;
     
     //if we want start from up
-    $scope.adjust=90;
+    $scope.adjustAngle=90;
+    $scope.adjustText=40;
     
     //angle
     //ratio
     function  convertPolarToCartesian() {
-	    $scope.realAngle=$scope.angle-$scope.adjust;
-	    /*if ($scope.realAngle>360) {
-		    $scope.realAngle=$scope.realAngle-360;
-	    }*/
+	    /*
+		$scope.realAngle=$scope.angle-$scope.adjustAngle;
 	    $scope.realAngle=-$scope.realAngle;
-	    $scope.x1 = $scope.svgCenterX+$scope.ratio*Math.cos(Math.PI*($scope.realAngle)/180);
-		$scope.y1 = $scope.svgCenterY-$scope.ratio*Math.sin(Math.PI*($scope.realAngle)/180);
+	    $scope.x1 = $scope.svgCenterX+$scope.radius*Math.cos(Math.PI*($scope.realAngle)/180);
+		$scope.y1 = $scope.svgCenterY-$scope.radius*Math.sin(Math.PI*($scope.realAngle)/180);
+		*/
+		
+		var convert=dnaviewerService.polarToCartesian($scope.svgCenterX, $scope.svgCenterY, $scope.radius, $scope.angle, $scope.adjustAngle);
+		//console.log(convert);
+		$scope.x1=convert.x;
+		$scope.y1=convert.y;
     }
+   
+    
     
     convertPolarToCartesian();
     
-    $scope.$watch('ratio', function() {
+    
+    //so let's do it!!!!!!!!!
+    
+    $scope.featureMarkers = [
+        {start : 482, end : 567, text : 'LEUII'},
+        {start : 585, end : 645, text : 'AMPR'},
+        {start : 661, end : 692, text : 'ADHI'}
+    ];
+    
+    $scope.moleculeLenght=800;
+    
+    //
+    $scope.testMarker={start : 500, end :615 , text : 'LEUII'};
+    
+    //
+    var test2=dnaviewerService.convertPositionToAngle($scope.testMarker.start, $scope.moleculeLenght);
+    console.log(test2);
+    
+    var test3=dnaviewerService.drawArc($scope.svgCenterX, $scope.svgCenterY, $scope.radius, $scope.adjustAngle, $scope.adjustText, $scope.testMarker.start, $scope.testMarker.end, $scope.moleculeLenght);
+    console.log(JSON.stringify(test3, null, ' '));
+    $scope.w1=test3.A.x;
+    $scope.z1=test3.A.y;
+    
+    $scope.w2=test3.B.x;
+    $scope.z2=test3.B.y;
+    
+    $scope.largeArcFlag=test3.largeArcFlag;
+    
+    $scope.circleTestX=test3.middlePoint.x-20;
+    $scope.circleTestY=test3.middlePoint.y-20;
+    
+    $scope.$watch('radius', function() {
        convertPolarToCartesian();
     });
     

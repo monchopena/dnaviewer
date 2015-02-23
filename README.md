@@ -12,7 +12,7 @@ designs.
 
 ## Notes
 
-###23-02-2015
+###23-02-2015 Part I
 
 - First I represented JSON in a table, ordered by positions. So I could understand the data
 
@@ -26,11 +26,15 @@ designs.
 
 - Now I know the tools. Next chapter soon ...
 
+###23-02-2015 Part II
+
+- Arc and image showed
 
 Live demo
 -------------
 
 My latest updates here:
+
 http://dnaviewer.bdunk.com/
 
 Installation

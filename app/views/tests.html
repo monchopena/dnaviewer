@@ -153,12 +153,12 @@
 </p>
 
 <p>
-<input ng-model="ratio" type="text">
+<input ng-model="radius" type="text">
 </p>
 
 <pre>
 	angle: {{angle}} 
-	ratio: {{ratio}}
+	radius: {{radius}}
 	x1: {{x1}}
 	y1: {{y1}}
 	svgViewBox: {{svgViewBox}} 
@@ -171,6 +171,10 @@
 </pre>
 
 
+<style>
+	:hover { stroke: cornflowerblue; }
+</style>
+
 <svg version="1.1" viewBox="0 0 500 500">
 
 <!--
@@ -181,10 +185,23 @@
   
   <circle fill="red" ng-attr-cx="{{x1}}" ng-attr-cy="{{y1}}" r="5"/>
   
+  
+  <path stroke="blue" ng-attr-stroke-width="{{svgStroke}}" fill="none" ng-attr-d="M{{w1}},{{z1}} A{{svgRatio}},{{svgRatio}} 0 {{largeArcFlag}},1 {{w2}},{{z2}}" class="path"/>
+  
   <!--
-  <path stroke="blue" ng-attr-stroke-width="{{svgStroke}}" fill="none" ng-attr-d="M{{svgCenterX}}, {{svgCenterY}}  m0,-{{svgRatio}} A{{svgRatio}},{{svgRatio}} 0 0,1 450,250"/>
+	  <circle fill="red" ng-attr-cx="{{circleTestX}}" ng-attr-cy="{{circleTestY}}" r="5"/>
   -->
   
+  <image xlink:href="../images/sbol/assembly-scar.jpeg" ng-attr-x="{{circleTestX}}" ng-attr-y="{{circleTestY}}" height="40px" width="40px"/>
+  
+  
+</svg>
+
+<br>
+
+<svg width="5cm" height="4cm" version="1.1"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
+	<image xlink:href="../images/firefox.png" x="0" y="0" height="50px" width="50px"/>
 </svg>
 
 <table>
