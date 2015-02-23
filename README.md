@@ -1,5 +1,5 @@
 # dnaviewer
-Browser Based Viewer of DNA
+Browser Based Viewer of DNA, implemented by Moncho Pena.
 
 ## Introduction
 This repository implements a very simple single page application (SPA) that renders a diagram
@@ -10,6 +10,53 @@ Check it out here: http://www.sbolstandard.org/visual
 A quick Google Search for "Plasmid Diagram" (plasmids are a type of circular DNA molecule) will show you many different
 designs.
 
+## Notes
+
+###23-02-2015
+
+- First I represented JSON in a table, ordered by positions. So I could understand the data
+
+- For the representation of the molecule the best way is to make a circle.
+
+- I tried to represent the molecule with D3 but I think it's better with pure SVG.
+
+- This project AngularPlasmid (http://angularplasmid.vixis.com/) has given me very good ideas.
+
+- At the moment I've only had time to test and understand the operation of "path" command to make the arches. SVG usability is not obvious.
+
+- Now I know the tools. Next chapter soon ...
+
+
+Live demo
+-------------
+
+My latest updates here:
+http://dnaviewer.bdunk.com/
+
+Installation
+-----------
+
+```sh
+$ git clone <repo URL>
+$ cd dnaviewer
+$ npm install
+$ bower install
+```
+
+Run the web app
+---------------
+
+```sh
+$ grunt serve
+```
+
+Access to the web app at http://localhost:9000/.
+
+Distribution command:
+
+```sh
+$ grunt build
+```
 
 
 

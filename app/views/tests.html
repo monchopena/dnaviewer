@@ -1,0 +1,217 @@
+<p>This is the tests view.</p>
+
+<h1>
+{{dnamolecule.sequence.bases}}
+</h1>
+
+<h2>
+	{{test}}
+</h2>
+
+<p>{{circles[0].x}}</p>
+
+<p>
+	<input class="btn btn-info" type="button" value="Move" ng-click="moveCircles(10)">
+</p>
+<p>
+	<input class="btn btn-info" type="button" value="Move -" ng-click="moveCircles(-10)">
+</p>
+
+<svg ng-attr-height="{{graph.height}}" ng-attr-width="{{graph.width}}">  
+    <circle ng-repeat="circle in circles" 
+        ng-attr-cx="{{circle.x}}" 
+        ng-attr-cy="{{circle.y}}" 
+        ng-attr-r= "{{circle.r}}"
+        ng-click="testZone()">
+    </circle>
+</svg> 
+
+<br>
+
+<style>
+	.pitufo {
+		font-size:18px;
+	}
+</style>
+
+<!--
+
+<plasmid sequencelength='7800'>
+            <plasmidtrack radius='100' style='fill:#f0f0f0;stroke:#ccc'>
+                <trackmarker start='139' end='1000' style='fill:#9cf;stroke:#036'>
+                    <markerlabel text='Pos niks' vadjust='35' style='font-size:10px'></markerlabel>
+                </trackmarker>
+                <trackmarker ng-click="testZone()" 	onmouseover="evt.target.setAttribute('opacity', '0.5');" onmouseout="evt.target.setAttribute('opacity','1)');" start='2999' end='3000' style='fill:#9cf;stroke:#036'>
+                    <markerlabel class="pitufo" text='Pos niks' vadjust='35'></markerlabel>
+                </trackmarker>
+                <trackscale interval='500' direction='in' style='stroke:#ccc'></trackscale>
+                <trackscale interval='500' direction='in' showlabels='1' style='stroke:#f00;stroke-width:2p' labelvadjust='10' labelstyle='font-size:8px;fill:#999'></trackscale>
+            </plasmidtrack>
+        </plasmid>
+        
+-->
+
+<!--
+<svg version="1.1" viewBox="0 0 360 360">
+
+<!--
+<circle cx="250" cy="250" r="2" stroke="black" fill="red" />
+-->
+<!--
+<circle cx="250" cy="250" r="200" fill="red" />
+<circle cx="250" cy="250" r="180" fill="white" />
+-->
+
+<!--
+ <path class="style" d="M180,180 L{{x1}},{{y1}} A180,180 0 {{largeArcFlag}},1 {{x2}},{{y2}} z"style="fill: blue"/>
+-->
+
+<!--
+<path stroke="blue" stroke-width="20" fill="none" d="M250,250 L{{x2}},{{y2}} a200,200 0 0,1 {{x2}},{{y2}} z" ng-click="testZone()" />
+
+<!--
+<path stroke="yellow" stroke-width="20" fill="none" d="M250,250 L{{z2}},{{w2}} a200,200 0 0,1 {{z2}},{{w2}} z" ng-click="testZone()" />
+<!--
+<path stroke="blue" stroke-width="20" fill="none" d="M250,60 A190,190 0 0,1 440,250" ng-click="testZone()" />
+<path stroke="purple" stroke-width="20" fill="none" d="M440,250 A190,190 0 0,1 250,440" ng-click="testZone()" />
+<path stroke="green" stroke-width="20" fill="none" d="M250,440 A190,190 0 0,1 60,250" ng-click="testZone()" />
+	
+-->
+<!-- <path style="fill:none; stroke:red; stroke-width:5" d="M100,200 A200,200" /> -->
+<!--
+</svg>
+-->
+<!--
+<plasmid sequencelength="7500" plasmidheight="375" plasmidwidth="375">
+<plasmidtrack width="5" radius='110'>
+<tracklabel labelstyle="font-size:18px;font-weight:700" text="pLVG440"></tracklabel>
+<tracklabel labelstyle="font-size:10px;font-weight:300" vadjust="20" text="7500 bp"></tracklabel>
+<trackmarker start="1607" end="3100" wadjust="15" vadjust="15" markerstyle="fill:none;stroke:#000;stroke-width:2px">
+<markerlabel type="path" text="ORF 3" labelstyle="font-size:10px;font-weight:400"></markerlabel>
+</trackmarker>
+<trackmarker start="2940" end="3050" wadjust="10" vadjust="18" markerstyle="fill:none;stroke:#000;stroke-width:2px;" arrowendlength="5"></trackmarker>
+<trackmarker start="3100" end="4200" wadjust="15" vadjust="15" markerstyle="fill:none;stroke:#000;stroke-width:2px">
+<markerlabel type="path" text="ORF 4" labelstyle="font-size:10px;font-weight:400"></markerlabel>
+</trackmarker>
+<trackmarker start="4040" end="4150" wadjust="10" vadjust="18" markerstyle="fill:none;stroke:#000;stroke-width:2px;" arrowendlength="5"></trackmarker>
+<trackmarker start="4500" end="5200" wadjust="15" vadjust="15" markerstyle="fill:none;stroke:#000;stroke-width:2px">
+<markerlabel type="path" text="ORF 5" labelstyle="font-size:10px;font-weight:400"></markerlabel>
+</trackmarker>
+<trackmarker start="5040" end="5150" wadjust="10" vadjust="18" markerstyle="fill:none;stroke:#000;stroke-width:2px;" arrowendlength="5"></trackmarker>
+<trackmarker start="5300" end="6200" wadjust="15" vadjust="15" markerstyle="fill:none;stroke:#000;stroke-width:2px">
+<markerlabel type="path" text="ORF 6" labelstyle="font-size:10px;font-weight:400"></markerlabel>
+</trackmarker>
+<trackmarker start="6040" end="6150" wadjust="10" vadjust="18" markerstyle="fill:none;stroke:#000;stroke-width:2px;" arrowendlength="5"></trackmarker>
+<trackmarker start="6200" end="7400" wadjust="15" vadjust="15" markerstyle="fill:none;stroke:#000;stroke-width:2px">
+<markerlabel type="path" text="ORF 7" labelstyle="font-size:10px;font-weight:400"></markerlabel>
+</trackmarker>
+<trackmarker start="7240" end="7350" wadjust="10" vadjust="18" markerstyle="fill:none;stroke:#000;stroke-width:2px;" arrowendlength="5"></trackmarker>
+<trackmarker start="520" end="1600" wadjust="15" vadjust="-30" markerstyle="fill:none;stroke:#000;stroke-width:2px">
+<markerlabel type="path" text="ORF 2" labelstyle="font-size:10px;font-weight:400"></markerlabel>
+</trackmarker>
+<trackmarker start="570" end="700" wadjust="10" vadjust="-28" markerstyle="fill:none;stroke:#000;stroke-width:2px;" arrowstartlength="6"></trackmarker>
+<trackmarker start="570" wadjust="12" vadjust="-6" markerstyle="stroke:#000;stroke-width:3px;">
+<markerlabel text="Bgl II" labelstyle="font-size:10px;font-weight:bold" vadjust="20"></markerlabel>
+</trackmarker>
+<trackmarker start="995" wadjust="12" vadjust="-6" markerstyle="stroke:#000;stroke-width:3px;">
+<markerlabel text="Sma I" labelstyle="font-size:10px;font-weight:bold" vadjust="20"></markerlabel>
+</trackmarker>
+<trackmarker start="2493" wadjust="12" vadjust="-6" markerstyle="stroke:#000;stroke-width:3px;">
+<markerlabel text="Pst I" labelstyle="font-size:10px;font-weight:bold" vadjust="-20"></markerlabel>
+</trackmarker>
+<trackmarker start="3222" wadjust="12" vadjust="-6" markerstyle="stroke:#000;stroke-width:3px;">
+<markerlabel text="EcoRI" labelstyle="font-size:10px;font-weight:bold" vadjust="-20"></markerlabel>
+</trackmarker>
+<trackmarker start="4556" wadjust="12" vadjust="-6" markerstyle="stroke:#000;stroke-width:3px;">
+<markerlabel text="Dra II" labelstyle="font-size:10px;font-weight:bold" vadjust="-25"></markerlabel>
+</trackmarker>
+<trackmarker start="6155" wadjust="12" vadjust="-6" markerstyle="stroke:#000;stroke-width:3px;">
+<markerlabel text="EcoRI" labelstyle="font-size:10px;font-weight:bold" vadjust="-25"></markerlabel>
+</trackmarker>
+</plasmidtrack>
+</plasmid>
+
+-->
+
+<!--
+<svg version="1.1" viewBox="0 0 500 500">
+<!--
+<circle fill="#FFFFFF" stroke="#231F20" stroke-width="50" cx="250" cy="250" r="200" />
+-->
+<!--
+<rect x="0" y="0" width="1000" height="1000" fill="black"/>
+  <circle cx="500" cy="500" r="500" fill="red"/>
+  <rect x="0" y="500" width="1000" height="500" fill="black"/>
+  <rect x="0" y=  "0" width="1000" height="500" fill="black">
+    <animateTransform attributeName="transform" type="rotate" begin="0s" dur="5s" fill="freeze" from="0,500,500" to="180,500,500"/>
+  <rect/>
+</svg>
+-->
+
+<p>
+<input ng-model="angle" type="text">
+</p>
+
+<p>
+<input ng-model="ratio" type="text">
+</p>
+
+<pre>
+	angle: {{angle}} 
+	ratio: {{ratio}}
+	x1: {{x1}}
+	y1: {{y1}}
+	svgViewBox: {{svgViewBox}} 
+	svgWidth: {{svgWidth}}
+	svgHigh: {{svgHigh}}
+	svgStroke: {{svgStroke}}
+	svgCenterX: {{svgCenterX}}
+	svgCenterY: {{svgCenterY}}
+	svgRatio: {{svgRatio}}
+</pre>
+
+
+<svg version="1.1" viewBox="0 0 500 500">
+
+<!--
+<svg ng-attr-height="{{svgWidth}}" ng-attr-width="{{svgHigh}}">  
+-->
+
+  <circle fill="#FFFFFF" stroke="#231F20" ng-attr-stroke-width="{{svgStroke}}" ng-attr-cx="{{svgCenterX}}" ng-attr-cy="{{svgCenterY}}" ng-attr-r="{{svgRatio}}" />
+  
+  <circle fill="red" ng-attr-cx="{{x1}}" ng-attr-cy="{{y1}}" r="5"/>
+  
+  <!--
+  <path stroke="blue" ng-attr-stroke-width="{{svgStroke}}" fill="none" ng-attr-d="M{{svgCenterX}}, {{svgCenterY}}  m0,-{{svgRatio}} A{{svgRatio}},{{svgRatio}} 0 0,1 450,250"/>
+  -->
+  
+</svg>
+
+<table>
+<tbody>
+	<thead>
+		<th>#</th>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Visible</th>
+		<th>Start</th>
+		<th>End</th>
+		<th>Strand</th>
+		<th>Lenght</th>
+		<th>Simbol</th>
+	</thead>
+	<tr ng-repeat="dna in dnamolecule.dnafeatures">
+		<td>{{dna.dnafeatureId}}</td>
+		<td>{{dna.dnafeature.name}}</td>
+		<td>{{dna.dnafeature.category.name}}</td>
+		<td>visible???</td>
+		<td>{{dna.start}}</td>
+		<td>{{dna.end}}</td>
+		<td>{{dna.strand}}</td>
+		<td>{{dna.dnafeature.length}}</td>
+		<td>{{dna.dnafeature.category.properties.symbol}}</td>
+	</tr>
+</tbody>
+</table>
+
+

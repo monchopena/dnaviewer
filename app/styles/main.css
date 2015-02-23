@@ -1,3 +1,4 @@
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -43,12 +44,9 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  text-align: center;
+  /*text-align: center;*/
   border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+  padding: 10px;
 }
 
 /* Supporting marketing content */
@@ -62,7 +60,8 @@ body {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 730px;
+    padding-right: 15px;
+    padding-left: 15px;
   }
 
   /* Remove the padding we set earlier */
@@ -80,4 +79,71 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+/* My own CSS*/
+#show-btn {
+	padding-left: 30px;
+}
+
+.show-description p {
+	font-size: 12px;
+	margin: 5px;
+}
+
+.bases {
+  height: 80px;
+  overflow-x: scroll;
+}
+
+.bases-in-line {
+  float: left;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 15px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+/* TC-Chart */
+
+.tc-chart-js-legend {
+  list-style-type: none;
+  padding-left: 0px;
+}
+.tc-chart-js-legend li {
+  display: block;
+  float: left;
+  clear:both;
+  padding:10px;
+}
+.tc-chart-js-legend li span {
+  width:25px;
+  height:25px;
+  display:block;
+  float:left;
+  margin-right:10px;
+}
+
+/* Bases color */
+
+.guanine {
+  background-color: green;
+}
+
+.adenine {
+  background-color: blue;
+}
+
+.thymine {
+  background-color: yellow;
+}
+
+.cytosine {
+  background-color: red;
 }

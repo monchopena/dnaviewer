@@ -15,13 +15,22 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'angular-loading-bar'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
+      })
+      .when('/tests', {
+        templateUrl: 'views/tests.html',
+        controller: 'TestsCtrl'
+      })
+      .when('/404', {
+        templateUrl: 'views/404.html',
+        controller: '404Ctrl'
       })
       .when('/about', {
         templateUrl: 'views/about.html',

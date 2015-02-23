@@ -1,23 +1,73 @@
 <div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+  <h3>
+  {{dnamolecule.name}}
+  <span id="show-btn">
+ 	<button type="button" class="btn btn-primary btn-info" ng-click="showDescription = !showDescription">
+      <span ng-show="showDescription">Show less</span>
+	  <span ng-show="!showDescription">Show more</span>
+    </button>
+  </span>
+  </h3>
+  <!-- 
+  	Information about DNA molecule
+   -->
+   <span class="show-description" ng-show="showDescription">
+   	<p>Id: {{dnamolecule.id}}</p>
+   	<p>Created: {{dnamolecule.created | date : format : timezone}}</p>
+   	<p>Description: {{dnamolecule.description}}</p>
+   	<p>Circular: {{dnamolecule.isCircular}}</p>
+   	<p>Length: {{dnamolecule.length}}</p>
+   	<p>Specie: {{dnamolecule.properties.species}}</p>
+   	<p>Nuclease: {{dnamolecule.properties.nuclease}}</p>
+   	<p>User Name: {{dnamolecule.user.name}}</p>
+   	<p>User Email: <a href="mailto:{{user.email}}">{{dnamolecule.user.email}}</a></p>
+   </span>
 </div>
 
 <div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
+ here svg
+</div>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
+<div class="row marketing bases">
+  <table>
+  	<tr>
+  		<td ng-repeat="base in bases track by $index">{{base}}</td>
+  	</tr>
+  	<tr>
+  		<td ng-repeat="baseColour in basesColour track by $index" ng-class="baseColour">&nbsp;</td>
+  	</tr>
+  </table>
+</div>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
+<div class="row marketing">
+
+	<table class="table">
+		<thead>
+			<td>Id</td>
+			<td>Name</td>
+			<td>Type</td>
+			<td>Start</td>
+			<td>End</td>
+			<td>Strand</td>
+			<td>Length</td>
+		</thead>
+		<tr>
+			<td></td>
+			<td><input type="text" ng-model="search.dnafeature.name" class="form-control" placeholder="Search by name"></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+    	<tr ng-repeat="dna in sortedDnamoleculefeature | filter:search">
+			<td>{{dna.dnafeatureId}}</td>
+			<td>{{dna.dnafeature.name}}</td>
+			<td>{{dna.dnafeature.category.name}}</td>
+			<td>{{dna.start}}</td>
+			<td>{{dna.end}}</td>
+			<td>{{dna.strand}}</td>
+			<td>{{dna.dnafeature.length}}</td>
+		</tr>
+	</table>
 </div>
