@@ -1,14 +1,19 @@
-<p>This is the tests view.</p>
 
-<h1>
+<blockquote>
+		   <p>This is a confusing page full of tests. In a production environment is erased.</p>
+</blockquote>
+
+<p>How long is dna molecule?</p>
+
+<pre>
 {{dnamolecule.sequence.bases}}
-</h1>
+</pre>
 
 <h2>
 	{{test}}
 </h2>
 
-<p>{{circles[0].x}}</p>
+<p>{{circles[0].x}}, {{circles[0].y}}</p>
 
 <p>
 	<input class="btn btn-info" type="button" value="Move" ng-click="moveCircles(10)">
@@ -26,13 +31,9 @@
     </circle>
 </svg> 
 
-<br>
-
-<style>
-	.pitufo {
-		font-size:18px;
-	}
-</style>
+<!--
+	Testing angular plasmid library https://github.com/vixis/angularplasmid
+-->
 
 <!--
 
@@ -149,11 +150,11 @@
 -->
 
 <p>
-<input ng-model="angle" type="text">
+angle: <input ng-model="angle" type="text">
 </p>
 
 <p>
-<input ng-model="radius" type="text">
+radius: <input ng-model="radius" type="text">
 </p>
 
 <pre>
@@ -170,7 +171,9 @@
 	svgRatio: {{svgRatio}}
 </pre>
 
-
+<!--
+	CSS tests interactions
+-->
 <style>
 	.path:hover { stroke: cornflowerblue; }
 </style>
@@ -199,14 +202,21 @@
   
 </svg>
 
-<br>
+
+<!--
+	Images in SVG
+-->
 
 <svg width="5cm" height="4cm" version="1.1"
      xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
-	<image xlink:href="../images/firefox.png" x="0" y="0" height="50px" width="50px"/>
+	<image xlink:href="../images/firefox.png" x="0" y="0" height="150px" width="150px"/>
 </svg>
 
-<table>
+<!--
+	Tests with tables
+-->
+
+<table class="table">
 <tbody>
 	<thead>
 		<th>#</th>

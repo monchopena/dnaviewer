@@ -9,10 +9,16 @@
  */
 angular.module('dnaviewerApp')
   .service('dnaviewerService', function ($http, $q) {
-    // In this example we have only one DNA molecule and one JSON file.
+    
+    /* 
+	    In this example we have only one DNA molecule and one JSON file.
+	*/
 	
 	return {
 
+				/*
+					Getting DNA Molecule with promises
+				*/
 				getDNAmolecule: function(){
 					var defer = $q.defer();
 
@@ -26,7 +32,11 @@ angular.module('dnaviewerApp')
 
 					return defer.promise;
 				},
-				
+			
+			   /*
+					Converting Polar To Cartesian
+					SVG works with Cartesian Coords.
+			   */
 			   polarToCartesian: function polarToCartesian(centerX, centerY, radius, angleInDegrees, adjustAngle) {
                 var angleInRadians = (angleInDegrees - adjustAngle) * Math.PI / 180.0;
                 return {
@@ -34,16 +44,26 @@ angular.module('dnaviewerApp')
                     y: centerY + (radius * Math.sin(angleInRadians))
                 };
                },
-				
+			
+			   /*
+					This function convert one positon in an angle.
+			   */
 			   convertPositionToAngle: function convertPositionToAngle(position, totalPositions) {
                   return position*360/totalPositions;
                },
                
-               drawArc: function convertCoordsToArc(centerX, centerY, radius, adjustAngle, adjustText, start, end, moleculeLenght, text, color, image, dnaFeatureID) {
-	               
+               /*
+	               This is the most important function
 	               //documentation
 	               //http://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands
+               */
+               drawArc: function convertCoordsToArc(centerX, centerY, radius, adjustAngle, adjustText, start, end, moleculeLenght, text, color, image, dnaFeatureID) {
 	               
+	               
+	               /*
+		               If angle > 180 then choose Large Arc
+		               To understand this visit path documentation in svg
+	               */
 	               var largeArcFlag=0;
 	               
 	               var longTotal=end-start;
@@ -65,6 +85,7 @@ angular.module('dnaviewerApp')
 	               var adjustRadius=radius+adjustText;
 	               var middlePoint=this.polarToCartesian(centerX, centerY, adjustRadius, middleAngle, adjustAngle);
 	               
+	               //With this we have all the necessary vars
 	               return {
                     A: startPoint,
                     B: endPoint,

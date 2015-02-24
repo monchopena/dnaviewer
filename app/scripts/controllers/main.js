@@ -10,27 +10,32 @@
 angular.module('dnaviewerApp')
     .controller('MainCtrl', function($scope, dnaviewerService, $location, $q, $filter, orderByFilter) {
 
-        // init dnamolecule
+        // Init dnamolecule
         $scope.dnamolecule = null;
 		
+		// Is selectted feature?
 		$scope.idSelectedFeature = null;
 		
-		//I tried use this for svg but it's impossible TODO
+		// SVG Chars
 		$scope.svgWidth=500;
-		$scope.svgHigh=$scope.svgWidth; //It's a circle  
+		$scope.svgHigh=$scope.svgWidth; //It's a circle!! 
 		
-		$scope.svgViewBox='0 0 '+$scope.svgWidth+' '+$scope.svgHigh;
+		//I could not use this variable
+		//$scope.svgViewBox='0 0 '+$scope.svgWidth+' '+$scope.svgHigh;
 		
+		//Where is center of circle?
 		$scope.svgCenterX=$scope.svgWidth/2;
 		$scope.svgCenterY=$scope.svgHigh/2;
 		    
+		//Init ratios and strokes
 	    $scope.svgRatio=150;  
 	    $scope.svgStroke=30;
 	    
-	    //if we want start from up
+	    //If we want start from 12 o' clock
 	    $scope.adjustAngle=90;
 	    
 	    //turnMolecule
+	    //a simple function to rotate dnamolecule
 	    $scope.turnMolecule = function turnMolecule(angle) {
 		    if (angle===0) {
 			    $scope.adjustAngle=90;
@@ -39,13 +44,14 @@ angular.module('dnaviewerApp')
 		    }
 	    };
 	    
+	    //TODO: improve text positions
 	    $scope.adjustText=40;
 	    
-	    //select base color
+	    //Select base color
+	    //TODO: a page with settings?
 	    $scope.baseColor='#eee'; //grey
   	    
-  	    //assgign colors to 
-  	    
+  	    //assgign colors to ...
   	    $scope.setSelected = function(idSelectedFeature) {
 	       $scope.idSelectedFeature = idSelectedFeature;
 	       $scope.dnaFeature(idSelectedFeature);
@@ -53,22 +59,32 @@ angular.module('dnaviewerApp')
 	    };
 	    
 	    
-	     $scope.getDNAMolecule = function() {
+	    /*
+		    This is the most important function in this controller
+		    
+	    */
+	    $scope.getDNAMolecule = function() {
 				dnaviewerService.getDNAmolecule()
 				.then(function(data) {
 					// console.log(data);
 					$scope.dnamolecule = data;
+					
+					//DNA molecule Lenght
 					$scope.moleculeLenght=data.length;
 					
+					//Features ordered by occurrence
 					$scope.sortedDnamoleculefeatures = orderByFilter($scope.dnamolecule.dnafeatures, '+start');
 					
+					//A new var with all Coords and Data
 					var drawMarkers=[];
+					
+					//Auxiliar var
 					var record='';
 					
 					angular.forEach($scope.sortedDnamoleculefeatures, function(dnafeature) {
 							  
 							  //console.log(value.dnafeatureId);
-							  //hack! we will need all types and make a settings page
+							  //hack! we will need all types and may be make a settings page
 							  var chooseColor='';
 							  var chooseImage='../images/sbol/'+dnafeature.dnafeature.category.name+'.png';
 							  
@@ -95,16 +111,17 @@ angular.module('dnaviewerApp')
 									chooseColor='#d627ff';
 								break;
 							 }
-							  
-							  record=dnaviewerService.drawArc($scope.svgCenterX, $scope.svgCenterY, $scope.svgRatio, $scope.adjustAngle, $scope.adjustText, dnafeature.start, dnafeature.end, $scope.moleculeLenght, dnafeature.dnafeature.name, chooseColor, chooseImage, dnafeature.dnafeatureId);
-							  
-							  //console.log(JSON.stringify(record, null, ' '));
-							  drawMarkers.push(record);
-							  
-							  //console.log('$scope.drawMarkers: '+$scope.drawMarkers);
+							
+							//We call drawArc Service  
+							record=dnaviewerService.drawArc($scope.svgCenterX, $scope.svgCenterY, $scope.svgRatio, $scope.adjustAngle, $scope.adjustText, dnafeature.start, dnafeature.end, $scope.moleculeLenght, dnafeature.dnafeature.name, chooseColor, chooseImage, dnafeature.dnafeatureId);
+							//console.log(JSON.stringify(record, null, ' '));
+							
+							//Pushing records in drawMarkers
+							drawMarkers.push(record);
 							  
 					});
 					
+					//Using a defer it's very important here!
 					$q.all(drawMarkers).then(function(){
 						// This callback function will be called when all the promises are resolved. 
 						//console.log(drawMarkers);
@@ -114,26 +131,22 @@ angular.module('dnaviewerApp')
 				},
 				function(dataError) {
 					console.log(dataError);
+					//If the data is not accessible
                     $location.url('/404');
 				});
 			};
 
          $scope.dnaFeature = function getDNAMoleculeFeature(id) {
-	         //console.log(id);
-	         $scope.selectedDNAFeature = $filter('filter')($scope.dnamolecule.dnafeatures, {dnafeatureId: id})[0];
-	         //console.log($scope.selectedDNAFeature.dnafeature.pattern.bases);
+		 	//Using a simple Angular filter for obtain DNA Feature 
+	        $scope.selectedDNAFeature = $filter('filter')($scope.dnamolecule.dnafeatures, {dnafeatureId: id})[0];
+	        //console.log($scope.selectedDNAFeature.dnafeature.pattern.bases);
          };
          
          
-         
+         //When angle changes ...
 		 $scope.$watchGroup(['adjustAngle'], function() {
 			$scope.getDNAMolecule();
-		  });
+		 });
 		  
-		  /*
-		  $scope.$watchGroup(['dnaFeature'], function() {
-			console.log('Al loro');
-		  });
-		  */
 
     });

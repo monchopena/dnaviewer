@@ -1,3 +1,6 @@
+<!-- 
+  	General Information about DNA molecule
+-->
 <div class="jumbotron">
   <h3>
   {{dnamolecule.name}}
@@ -8,9 +11,7 @@
     </button>
   </span>
   </h3>
-  <!-- 
-  	Information about DNA molecule
-   -->
+  
    <span class="show-description" ng-show="showDescription">
    	<p>Id: {{dnamolecule.id}}</p>
    	<p>Created: {{dnamolecule.created | date : format : timezone}}</p>
@@ -22,23 +23,23 @@
    	<p>User Name: {{dnamolecule.user.name}}</p>
    	<p>User Email: <a href="mailto:{{user.email}}">{{dnamolecule.user.email}}</a></p>
    </span>
+   
 </div>
 
 <div class="row marketing">
 
 		<div class="col-md-8">
-			
+
 			<!--
-			<pre>
-{{dnaMarkers|json}}
-			</pre>
-			-->
-			
+				Begin of SVG Graphic
+				It seems that the only way that is responsive to viewBox. I tried to get here angular variables does not work. TODO: Investigate why.
+			-->			
 			<svg version="1.1" viewBox="0 0 500 500">
 			
 				<!-- This is the base -->
 				<circle fill="#FFFFFF" ng-attr-stroke="{{baseColor}}" ng-attr-stroke-width="{{svgStroke}}" ng-attr-cx="{{svgCenterX}}" ng-attr-cy="{{svgCenterY}}" ng-attr-r="{{svgRatio}}" />
 			
+				<!-- Drawing arcs -->
 			     <path ng-repeat="feature in dnaMarkers"
 			     ng-attr-stroke="{{feature.color}}" 
 			     ng-attr-stroke-width="{{svgStroke}}" 
@@ -49,13 +50,24 @@
 			     />
 			     
 			     <!--
+				     Auxiliar points if need it.
+				 -->
+			     <!--
 				 <circle ng-repeat="feature in dnaMarkers"
 				 fill="red" ng-attr-cx="{{feature.middlePoint.x}}" ng-attr-cy="{{feature.middlePoint.y}}" r="5"/>
 				 -->
 			
+				 <!--
+					Images
+					TODO: pass hight an width with angular vars 
+				 -->
 				 <image ng-repeat="feature in dnaMarkers"
 				 xlink:href="{{feature.image}}" ng-attr-x="{{feature.middlePoint.x-5}}" ng-attr-y="{{feature.middlePoint.y-5}}" height="10px" width="10px"/>
 				 
+				  <!--
+				  	Texts:
+				  	TODO: Depending on the quadrant show one way or another.
+				  -->	 
 				  <text class="text-circle" ng-show="textShow" ng-repeat="feature in dnaMarkers"
 				  ng-attr-x="{{feature.middlePoint.x-10}}" ng-attr-y="{{feature.middlePoint.y-10}}" fill="black">{{feature.text}}</text>
 			
@@ -64,7 +76,10 @@
 			
 		</div>
         <div class="col-md-4">
-	        
+	        <!--
+				Tools for rotate molecule
+				TODO: Replace them with icons.
+			-->
 	        <div class="row">
 		        <p>
 			        <button type='button' class='btn' ng-click="turnMolecule(-10)">Backward</button>
@@ -75,67 +90,57 @@
 	        
 	        <div class="row bg-info add-padding">
 		        
+		        <!-- 
+					General Information about Feature selected
+				-->
 
-<div ng-show="idSelectedFeature">
+				<div ng-show="idSelectedFeature">
+				
+					<p>Id: {{selectedDNAFeature.dnafeatureId}}</p>
+					<p>Created: {{selectedDNAFeature.dnafeature.created | date : format : timezone}}</p>
+					<p>Name: {{selectedDNAFeature.dnafeature.name}}</p>
+					<p>Start: {{selectedDNAFeature.start}}</p>
+					<p>End: {{selectedDNAFeature.end}}</p>
+					<p>Length: {{selectedDNAFeature.dnafeature.length}}</p>
+					<p>Type: {{selectedDNAFeature.dnafeature.category.name}}</p>
+					<p>Privacy: {{selectedDNAFeature.dnafeature.privacy}}</p>
+					<p>Org. Email: <a href="mailto:{{selectedDNAFeature.dnafeature.user.organisation.adminEmail}}">{{selectedDNAFeature.dnafeature.user.organisation.adminName}}</a></p>
+				
+				</div>
+				
+				<div ng-show="!idSelectedFeature">
+					You can click directly on the image or look in the table below.
+				</div>
 
-<p>
-	Id: {{selectedDNAFeature.dnafeatureId}}
-</p>
-
-<p>
-	Created: {{selectedDNAFeature.dnafeature.created | date : format : timezone}}
-</p>
-
-<p>
-	Name: {{selectedDNAFeature.dnafeature.name}}
-</p>
-
-<p>
-	Start: {{selectedDNAFeature.start}}
-</p>
-
-<p>
-	End: {{selectedDNAFeature.end}}
-</p>
-
-<p>
-	Length: {{selectedDNAFeature.dnafeature.length}}
-</p>
-
-<p>
-	Type: {{selectedDNAFeature.dnafeature.category.name}}
-</p>
-
-<p>
-	Privacy: {{selectedDNAFeature.dnafeature.privacy}}
-</p>
-
-<p>
-	Org. Email: <a href="mailto:{{selectedDNAFeature.dnafeature.user.organisation.adminEmail}}">{{selectedDNAFeature.dnafeature.user.organisation.adminName}}</a>
-</p>
-
-</div>
-
-<div ng-show="!idSelectedFeature">
-	Select a feature for more information
-</div>
-
-</div>
-
-<p>
-<input type="checkbox" ng-model="textShow"> Show text
-</p>
+			</div>
+			
+			
+			<!-- 
+				Show text features
+			-->
+			<div class="row">
+				<p class="add-padding">
+					<input type="checkbox" ng-model="textShow"> Show text in graph
+				</p>
 	        
-</div>
+			</div>
 
 </div>
 
+<!--
+	Bases Selected
+	TODO: Show in horizontal
+-->
 <div class="row marketing bases" ng-show="selectedDNAFeature.dnafeature.pattern.bases">
 <pre>
 {{selectedDNAFeature.dnafeature.pattern.bases}}
 </pre>
 </div>
 
+
+<!--
+	Table with features
+-->
 <div class="row marketing">
 
 	<table class="table">

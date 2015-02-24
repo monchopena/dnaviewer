@@ -10,11 +10,8 @@ Check it out here: http://www.sbolstandard.org/visual
 A quick Google Search for "Plasmid Diagram" (plasmids are a type of circular DNA molecule) will show you many different
 designs.
 
-## Notes
-
-###23-02-2015 Part I
-
-- First I represented JSON in a table, ordered by positions. So I could understand the data
+### 23-02-2015 Part I
+- First I represented JSON in a table, ordered by positions. So I could understand the data.
 
 - For the representation of the molecule the best way is to make a circle.
 
@@ -26,24 +23,44 @@ designs.
 
 - Now I know the tools. Next chapter soon ...
 
-###23-02-2015 Part II
-
+### 23-02-2015 Part II
 - Arc and image showed
 
-###23-02-2015 Part III
-
+### 23-02-2015 Part III
 - First beta is running!
+
+### 24-02-2015
+- Version 1.0 - Angry Koala done.
+
+
+TODO
+-------------
+- Make a directive, eg:
+
+```
+<dnamolecule length="length">
+    ...
+	<feature name="Terminator" ... >
+	</feature>
+	...
+</dnamolecule>
+```
+
+- Improved text layout.
+
+- Show bases only in horizontal.
+
+- ...
+
 
 Live demo
 -------------
-
 My latest updates here:
 
 http://dnaviewer.bdunk.com/
 
 Installation
 -----------
-
 ```sh
 $ git clone <repo URL>
 $ cd dnaviewer
@@ -53,7 +70,6 @@ $ bower install
 
 Run the web app
 ---------------
-
 ```sh
 $ grunt serve
 ```
@@ -65,8 +81,3 @@ Distribution command:
 ```sh
 $ grunt build
 ```
-
-
-
-
-
