@@ -30,7 +30,11 @@ designs.
 - First beta is running!
 
 ### 24-02-2015
-- Version 1.0 - Angry Koala done.
+- Version 1.0.0 (Codename Angry Koala) Done
+
+Result
+-------------
+![alt tag](https://raw.githubusercontent.com/monchopena/dnaviewer/master/app/images/sample_dnamolecule.png)
 
 
 TODO
