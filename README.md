@@ -30,6 +30,10 @@ designs.
 
 - Arc and image showed
 
+###23-02-2015 Part III
+
+- First beta is running!
+
 Live demo
 -------------
 

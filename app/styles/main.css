@@ -147,3 +147,25 @@ body {
 .cytosine {
   background-color: red;
 }
+
+/* Row selected */
+
+tr.selected-feature {
+	background-color: #D9EDF7;
+} 
+
+.selected-feature-circle {
+	stroke: #D9EDF7;
+} 
+.table  tr {
+    cursor: pointer;
+}
+
+.add-padding {
+	padding: 15px;
+}
+
+.text-circle {
+	font-size: 8px;
+	text-align: center;
+}

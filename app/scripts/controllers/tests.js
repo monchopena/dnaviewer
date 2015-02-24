@@ -68,7 +68,7 @@ angular.module('dnaviewerApp')
     var test2=dnaviewerService.convertPositionToAngle($scope.testMarker.start, $scope.moleculeLenght);
     console.log(test2);
     
-    var test3=dnaviewerService.drawArc($scope.svgCenterX, $scope.svgCenterY, $scope.radius, $scope.adjustAngle, $scope.adjustText, $scope.testMarker.start, $scope.testMarker.end, $scope.moleculeLenght);
+    var test3=dnaviewerService.drawArc($scope.svgCenterX, $scope.svgCenterY, $scope.radius, $scope.adjustAngle, $scope.adjustText, $scope.testMarker.start, $scope.testMarker.end, $scope.moleculeLenght, 'testText', '#FFF', 'Other', 520);
     console.log(JSON.stringify(test3, null, ' '));
     $scope.w1=test3.A.x;
     $scope.z1=test3.A.y;

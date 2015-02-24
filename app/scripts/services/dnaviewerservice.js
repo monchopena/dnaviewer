@@ -39,7 +39,7 @@ angular.module('dnaviewerApp')
                   return position*360/totalPositions;
                },
                
-               drawArc: function convertCoordsToArc(centerX, centerY, radius, adjustAngle, adjustText, start, end, moleculeLenght) {
+               drawArc: function convertCoordsToArc(centerX, centerY, radius, adjustAngle, adjustText, start, end, moleculeLenght, text, color, image, dnaFeatureID) {
 	               
 	               //documentation
 	               //http://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands
@@ -69,7 +69,11 @@ angular.module('dnaviewerApp')
                     A: startPoint,
                     B: endPoint,
                     largeArcFlag: largeArcFlag,
-                    middlePoint: middlePoint
+                    middlePoint: middlePoint,
+                    text: text,
+                    color: color,
+                    image: image,
+                    dnaFeatureID: dnaFeatureID
                    };
                }
 

@@ -25,18 +25,115 @@
 </div>
 
 <div class="row marketing">
- here svg
+
+		<div class="col-md-8">
+			
+			<!--
+			<pre>
+{{dnaMarkers|json}}
+			</pre>
+			-->
+			
+			<svg version="1.1" viewBox="0 0 500 500">
+			
+				<!-- This is the base -->
+				<circle fill="#FFFFFF" ng-attr-stroke="{{baseColor}}" ng-attr-stroke-width="{{svgStroke}}" ng-attr-cx="{{svgCenterX}}" ng-attr-cy="{{svgCenterY}}" ng-attr-r="{{svgRatio}}" />
+			
+			     <path ng-repeat="feature in dnaMarkers"
+			     ng-attr-stroke="{{feature.color}}" 
+			     ng-attr-stroke-width="{{svgStroke}}" 
+			     fill="none"
+			     ng-attr-d="M{{feature.A.x}},{{feature.A.y}} A{{svgRatio}},{{svgRatio}} 0 {{feature.largeArcFlag}},1 {{feature.B.x}},{{feature.B.y}}"
+			     ng-click="setSelected({{feature.dnaFeatureID}})"
+			     ng-class="{'selected-feature-circle' : feature.dnaFeatureID === idSelectedFeature}"
+			     />
+			     
+			     <!--
+				 <circle ng-repeat="feature in dnaMarkers"
+				 fill="red" ng-attr-cx="{{feature.middlePoint.x}}" ng-attr-cy="{{feature.middlePoint.y}}" r="5"/>
+				 -->
+			
+				 <image ng-repeat="feature in dnaMarkers"
+				 xlink:href="{{feature.image}}" ng-attr-x="{{feature.middlePoint.x-5}}" ng-attr-y="{{feature.middlePoint.y-5}}" height="10px" width="10px"/>
+				 
+				  <text class="text-circle" ng-show="textShow" ng-repeat="feature in dnaMarkers"
+				  ng-attr-x="{{feature.middlePoint.x-10}}" ng-attr-y="{{feature.middlePoint.y-10}}" fill="black">{{feature.text}}</text>
+			
+			</svg>
+			
+			
+		</div>
+        <div class="col-md-4">
+	        
+	        <div class="row">
+		        <p>
+			        <button type='button' class='btn' ng-click="turnMolecule(-10)">Backward</button>
+					<button type='button' class='btn' ng-click="turnMolecule(10)">Forward</button>
+					<button type='button' class='btn' ng-click="turnMolecule(0)">Reload</button>
+			    </p>
+	        </div>
+	        
+	        <div class="row bg-info add-padding">
+		        
+
+<div ng-show="idSelectedFeature">
+
+<p>
+	Id: {{selectedDNAFeature.dnafeatureId}}
+</p>
+
+<p>
+	Created: {{selectedDNAFeature.dnafeature.created | date : format : timezone}}
+</p>
+
+<p>
+	Name: {{selectedDNAFeature.dnafeature.name}}
+</p>
+
+<p>
+	Start: {{selectedDNAFeature.start}}
+</p>
+
+<p>
+	End: {{selectedDNAFeature.end}}
+</p>
+
+<p>
+	Length: {{selectedDNAFeature.dnafeature.length}}
+</p>
+
+<p>
+	Type: {{selectedDNAFeature.dnafeature.category.name}}
+</p>
+
+<p>
+	Privacy: {{selectedDNAFeature.dnafeature.privacy}}
+</p>
+
+<p>
+	Org. Email: <a href="mailto:{{selectedDNAFeature.dnafeature.user.organisation.adminEmail}}">{{selectedDNAFeature.dnafeature.user.organisation.adminName}}</a>
+</p>
+
 </div>
 
-<div class="row marketing bases">
-  <table>
-  	<tr>
-  		<td ng-repeat="base in bases track by $index">{{base}}</td>
-  	</tr>
-  	<tr>
-  		<td ng-repeat="baseColour in basesColour track by $index" ng-class="baseColour">&nbsp;</td>
-  	</tr>
-  </table>
+<div ng-show="!idSelectedFeature">
+	Select a feature for more information
+</div>
+
+</div>
+
+<p>
+<input type="checkbox" ng-model="textShow"> Show text
+</p>
+	        
+</div>
+
+</div>
+
+<div class="row marketing bases" ng-show="selectedDNAFeature.dnafeature.pattern.bases">
+<pre>
+{{selectedDNAFeature.dnafeature.pattern.bases}}
+</pre>
 </div>
 
 <div class="row marketing">
@@ -60,14 +157,15 @@
 			<td></td>
 			<td></td>
 		</tr>
-    	<tr ng-repeat="dna in sortedDnamoleculefeature | filter:search">
-			<td>{{dna.dnafeatureId}}</td>
-			<td>{{dna.dnafeature.name}}</td>
-			<td>{{dna.dnafeature.category.name}}</td>
-			<td>{{dna.start}}</td>
-			<td>{{dna.end}}</td>
-			<td>{{dna.strand}}</td>
-			<td>{{dna.dnafeature.length}}</td>
+		
+	    <tr ng-repeat="feature in sortedDnamoleculefeatures | filter:search" ng-click="setSelected(feature.dnafeatureId)" ng-class="{'selected-feature' : feature.dnafeatureId === idSelectedFeature}">
+			<td><input type="checkbox" ng-checked="feature.dnafeatureId === idSelectedFeature"></td>
+			<td>{{feature.dnafeature.name}}</td>
+			<td>{{feature.dnafeature.category.name}}</td>
+			<td>{{feature.start}}</td>
+			<td>{{feature.end}}</td>
+			<td>{{feature.strand}}</td>
+			<td>{{feature.dnafeature.length}}</td>
 		</tr>
 	</table>
 </div>
